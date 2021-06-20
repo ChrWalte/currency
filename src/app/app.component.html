@@ -1,0 +1,40 @@
+<div class="container">
+  <div class="user-input">
+    <div class="input-group input-group-sm">
+      <span class="input-group-text" id="input-group-sm-example"
+        >United States Currency Amount</span
+      >
+      <input
+        type="number"
+        step="any"
+        class="form-control"
+        aria-label="Small input group"
+        aria-describedby="input-group-sm"
+        [(ngModel)]="givenAmount"
+      />
+    </div>
+  </div>
+
+  <div class="currency-rate">
+    <span *ngFor="let currency of supportCurrencies">
+      <div class="row" *ngIf="currency.status === 'available'">
+        <div class="col-10">
+          <div>
+            <span>
+              <img class="img-fluid img-icon" [src]="currency.icon" />
+              {{ currency.countryName }} - {{ currency.currencyName }}
+            </span>
+          </div>
+        </div>
+        <div class="col-2">
+          <span class="float-end">
+            {{
+              calculateCurrency(currency.currencyCode)
+                | currency: currency.currencyCode
+            }}
+          </span>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
